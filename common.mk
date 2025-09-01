@@ -118,3 +118,17 @@ TARGET_RECOVERY_DEVICE_MODULES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=0 \
     selinux.reload_policy=0
+
+# Device identity
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.product.vendor.brand=Itel \
+    ro.product.vendor.device=itel-P1102GT \
+    ro.product.vendor.manufacturer=ITEL \
+    ro.product.vendor.model=itel P1102GT \
+    ro.product.vendor.name=P1102GT-OP
+
+# Platform & board
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.board.platform=mt6789 \
+    ro.product.board=tb8781p1_64 \
+    ro.vendor.mediatek.platform=MT6789
