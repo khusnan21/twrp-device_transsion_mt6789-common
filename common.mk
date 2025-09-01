@@ -113,3 +113,8 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 
 TARGET_RECOVERY_DEVICE_MODULES += \
     android.hardware.keymaster@4.1
+
+# Force permissive SELinux for recovery
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=0 \
+    selinux.reload_policy=0
