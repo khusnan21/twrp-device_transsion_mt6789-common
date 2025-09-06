@@ -88,7 +88,7 @@ service vendor.vibrator-default /vendor/bin/hw/android.hardware.vibrator-service
     disabled
     seclabel u:r:recovery:s0
 
-service vendor.gatekeeper /vendor/bin/hw/android.hardware.gatekeeper-service.trustkernel
+service vendor.gatekeeper /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     class hal
     interface aidl android.hardware.gatekeeper@1.0.IGatekeeper/default
     user system
@@ -96,7 +96,7 @@ service vendor.gatekeeper /vendor/bin/hw/android.hardware.gatekeeper-service.tru
     disabled
     seclabel u:r:recovery:s0
 
-service vendor.keymint /vendor/bin/hw/android.hardware.security.keymint-service
+service vendor.keymint /vendor/bin/hw/android.hardware.security.keymint-service.trustkernel
     class early_hal
     interface aidl android.hardware.security.keymint.IKeyMintDevice/default
     interface aidl android.hardware.security.keymint.IRemotelyProvisionedComponent/default
