@@ -1,3 +1,6 @@
+# Dynamic Partitions
+ro.boot.dynamic_partitions=true
+
 # Fstab
 ro.postinstall.fstab.prefix=/system
 
@@ -7,10 +10,22 @@ ro.sys.usb.storage.type=mtp
 # Crypto
 ro.crypto.volume.filenames_mode=aes-256-cts
 
-# Gatekeeper
-ro.hardware.gatekeeper=trustkernel
-
 # TEE
+ro.tee_support=1
+ro.tee.rkp_support=true
 ro.vendor.mtk_trustkernel_tee_support=1
+ro.hardware.kmsetkey=trustkernel
+ro.hardware.gatekeeper=trustkernel
+ro.hardware.kmsetkey=trustkernel
+ro.vendor.trustkernel.attest_ids=1
+ro.product.model_for_attestation=
+ro.product.brand_for_attestation=
+ro.product.name_for_attestation=
 
+# Keymaster
 keymaster_ver=4.1
+
+# Misc
+ro.vendor.mediatek.platform=MT6789
+ro.vendor.mtk_f2fs_enable=0
+ro.vendor.mtk_emmc_support=1
