@@ -113,3 +113,6 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 
 TARGET_RECOVERY_DEVICE_MODULES += \
     android.hardware.keymaster@4.1
+
+TARGET_OTA_CERTIFICATE := device/itel/P1102GT/security/releasekey.x509.pem
+PRODUCT_EXTRA_RECOVERY_KEYS += device/itel/P1102GT/security/releasekey
