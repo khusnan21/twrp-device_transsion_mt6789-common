@@ -48,10 +48,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh
-
 PRODUCT_PROPERTY_OVERRIDES += ro.twrp.vendor_boot=true
 
 # Dynamic Partitions
@@ -63,56 +59,86 @@ PRODUCT_TARGET_VNDK_VERSION := 31
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
+    bootctrl \
+    bootctrl.recovery \
+    android.hardware.boot@1.2-service \
     android.hardware.boot@1.2-mtkimpl \
-    android.hardware.boot@1.2-mtkimpl.recovery
+    android.hardware.boot@1.2-mtkimpl.recovery \
 
-PRODUCT_PACKAGES_DEBUG += \
-    bootctl
-
-# Fastbootd
 PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.0-impl-mock \
-    fastbootd
+    libgptutils \
+    libz \
+    libcutils \
 
-# Health Hal
+PRODUCT_PACKAGES += \
+    otapreopt_script \
+    cppreopts.sh \
+    update_engine \
+    update_verifier \
+    update_engine_sideload \
+    update_engine_client \
+
+# Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service
+    android.hardware.health@2.1-service \
+
+# Suspend service
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libSuspendProperties \
+    android.system.suspend@1.0 \
+    android.system.suspend-service \
+
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libSuspendProperties.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend@1.0.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend-V1-ndk.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend.control-V1-cpp.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/android.system.suspend.control.internal-cpp.so
+RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/hw/android.system.suspend-service
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.1
+    android.hardware.keymaster@4.0.vendor \
+    android.hardware.keymaster@4.1 \
 
-# Keystore Hal
-PRODUCT_PACKAGES += \
-    android.system.keystore2
-
-# MTK plpath utils
-PRODUCT_PACKAGES += \
-    mtk_plpath_utils \
-    mtk_plpath_utils.recovery
-
-# Security
+# Keymint
 PRODUCT_PACKAGES += \
     android.hardware.security.keymint \
     android.hardware.security.secureclock \
-    android.hardware.security.sharedsecret
+    android.hardware.security.sharedsecret \
 
-# Update engine
+# Remotely Key provisioner
+PRODUCT_PACKAGES += android.hardware.security.rkp-V3-ndk
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.security.rkp-V3-ndk.so
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libcppcose_rkp.so
+
+# Keystore2
 PRODUCT_PACKAGES += \
-    update_engine \
-    update_engine_sideload \
-    update_verifier
+    android.system.keystore2 \
 
-PRODUCT_PACKAGES_DEBUG += \
-    update_engine_client
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0.vendor \
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service \
 
-# Additional configs
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.1
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/android.hardware.gatekeeper-V1-ndk.so
 
-TARGET_RECOVERY_DEVICE_MODULES += \
-    android.hardware.keymaster@4.1
+# Otacert
+PRODUCT_EXTRA_RECOVERY_KEYS += \
+    $(LOCAL_PATH)/security/releasekey
+
+# Mtk plpath utils
+PRODUCT_PACKAGES += \
+    mtk_plpath_utils \
+    mtk_plpath_utils.recovery \
+
+# snapuserd
+PRODUCT_PACKAGES += snapuserd
+RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/snapuserd
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
 
 TARGET_OTA_CERTIFICATE := device/itel/P1102GT/security/releasekey.x509.pem
 PRODUCT_EXTRA_RECOVERY_KEYS += device/itel/P1102GT/security/releasekey
