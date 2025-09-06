@@ -217,3 +217,6 @@ BOARD_VENDOR_RAMDISK_FRAGMENT.recovery.MKBOOTIMG_ARGS := --ramdisk_type RECOVERY
 
 # SELinux
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/vendor_sepolicy
+
+TARGET_OTA_CERTIFICATE := device/itel/P1102GT/security/releasekey.x509.pem
+PRODUCT_EXTRA_RECOVERY_KEYS += device/itel/P1102GT/security/releasekey
