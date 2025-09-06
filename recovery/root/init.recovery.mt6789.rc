@@ -22,7 +22,7 @@ on fs
     chmod +x /vendor/bin/hw/*
     # */
 	
-    mount_all /first_stage_ramdisk/fstab.mt6878 --late
+    mount_all /first_stage_ramdisk/fstab.mt6789 --late
 
     mkdir /mnt/vendor           0755 system system
     mkdir /mnt/vendor/protect_f 0770 system system
