@@ -139,6 +139,3 @@ RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/snapuserd
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
-
-TARGET_OTA_CERTIFICATE := device/itel/P1102GT/security/releasekey.x509.pem
-PRODUCT_EXTRA_RECOVERY_KEYS += device/itel/P1102GT/security/releasekey
